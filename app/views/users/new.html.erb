@@ -1,0 +1,18 @@
+<h1>Sign up for Biddr</h1>
+<%if !@user.errors.empty?%>
+<p>
+  Please correct the below errors:
+</p>
+  <%@user.errors.full_messages.each_with_index do |message, index|%>
+    <%=index+1%>. <%= message%><br/></span>
+  <%end%>
+<%end%>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :first_name, label: "First Name" %>
+  <%= f.input :last_name, label: "Last Name" %>
+  <%= f.input :email, label: "E-mail" %>
+  <%= f.input :password, label: "Password" %>
+  <%= f.input :password_confirmation, label: "Confirm Password" %>
+  <%= f.submit "Sign me Up!", class: "btn btn-primary" %>
+<% end %>

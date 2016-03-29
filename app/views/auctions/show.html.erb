@@ -1,0 +1,16 @@
+<div>
+  <p><%= @auction.title %></p>
+  <p style="float:right"> Current Price: </p>
+</div>
+<div>
+  <p><%= @auction.description %></p>
+  <p style="float:right"> State: </p>
+</div>
+
+<% if @auction.user != current_user%>
+  <%= simple_form_for [@auction], remote: true do |f| %>
+    <%= f.input :reserve_price, class: "form-control" %>
+    <%= f.submit "Bid", class: "btn btn-primary" %>
+  <% end %>
+<%end%>
+<p><h2>Previous Bids</h2></p>

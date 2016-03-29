@@ -1,0 +1,10 @@
+<h1>Edit Profile</h1>
+
+<%= @user.errors.full_messages.join(", ") %>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :first_name, label: "First Name" %>
+  <%= f.input :last_name, label: "Last Name" %>
+  <%= f.input :email, label: "E-mail" %>
+  <%= f.submit "Update Profile!", class: "btn btn-primary" %>
+<% end %>

@@ -1,14 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Biddr</title>
+  <title>Biddr - Bid to Win</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<div class="container">
+<!--style="background-color: #e3f2fd;"-->
+  <nav role="navigation" class="navbar navbar-fixed" style="background-color: #e3f2fd;"> <!-- navbar-inverse for a black top bar-->
+    <div class="navbar-header">
+      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img alt="Brand" src="/assets/logo.png" style="max-width:70px; margin-top: -14px;">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="nav navbar-nav navbar-left nav-collapse">
+        <li><%= link_to "All Auctions", auctions_path %></li>
+      </ul>
 
-<%= yield %>
+      <%if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right nav-collapse">
+          <li><%= link_to "New Auction", new_auction_path %></li> <%# Add the new products path here %>
+        <p class="navbar-text">Signed in as
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.first_name%> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><span class="glyphicon glyphicon-list" aria-hidden="true"> <%= link_to "My Auctions", auction_user_path(current_user)%></span></li>
+              <li><span class="glyphicon glyphicon-user" aria-hidden="true"> <%= link_to "My Profile", user_path(current_user)%></span></li>
+              <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"> <%= link_to "Sign Out", sessions_path, method: :delete %></span></li>
+            </ul>
+          </li>
+          </p>
+        </ul>
+        <%else%>
+        <ul class="nav navbar-nav navbar-right nav-collapse">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign-In Options <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"><%= link_to " Sign In", new_session_path %></span></li>
+              <li><span class="glyphicon glyphicon-edit" aria-hidden="true"><%= link_to " Sign Up", new_user_path %></span></li>
+            </ul>
+          </li>
+        </ul>
+        <%end%>
+      </div>
+  </nav>
+</div>
 
+<div class="container">
+  <% flash.each do |name, msg|%>
+    <div class="alert alert-<%= name == "notice" ? "success" : "danger"%>">
+      <a class="close" data-dismiss="alert">&times;</a>
+      <span class="<%= name == "notice" ? "glyphicon glyphicon-info-sign " : "glyphicon glyphicon-exclamation-sign"%>" aria-hidden="true"></span>
+      <%= msg%>
+    </div>
+  <% end %>
+</div>
+
+<div class="container">
+  <%= yield %>
+</div>
+<div class="navbar navbar-fixed" style="background-color: #e3f2fd;">
+  <footer class="footer">
+    <div class="footcontainer">
+      <p class="text-muted" style="padding-top: 15px;">All rights reserved. Copyright-Mallinath&copy; Find me on <a href="www.linkedin.com/in/inmallinath">linked-in</a> or visit my <a href="https://github.com/inmallinath">Github</a>.   2016-2017</p>
+    </div>
+  </footer>
+</div>
 </body>
 </html>
