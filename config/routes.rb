@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
-  resources :auctions, only: [:index, :new, :create, :show]
+  resources :auctions, only: [:index, :new, :create, :show] do
+    member do
+      put :publish_state
+    end
+  end
   get "/auctions/:id/user" => "auctions#index_user", as: :auction_user
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

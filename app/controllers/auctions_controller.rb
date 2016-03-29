@@ -20,6 +20,14 @@ class AuctionsController < ApplicationController
     end
   end
 
+  def publish_state
+    @auction = Auction.find(params[:id])
+    @auction.publish
+    @auction.save
+    # @auction.update_attribute(:aasm_state, "Published")
+   redirect_to auctions_path
+  end
+
   def show
     @auction = Auction.find params[:id]
   end
@@ -30,6 +38,6 @@ class AuctionsController < ApplicationController
 
   private
   def auction_params
-    params.require(:auction).permit([:title, :description, :ends_on, :reserve_price])
+    params.require(:auction).permit([:title, :description, :ends_on, :reserve_price, :aasm_state])
   end
 end

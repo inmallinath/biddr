@@ -1,6 +1,6 @@
 <h1>Create a new Auction</h1>
 <%= simple_form_for @auction do |f| %>
-  <%= f.input :title, label: "Title", input_html: {class: "small-field"} %>
+  <%= f.input :title, label: "Title", input_html: {class: "form-control"} %>
   <%= f.input :description, input_html: {rows: 8} %>
   <%= f.input :ends_on, as: :string, input_html: { class: "datepicker", value: Time.now.strftime('%Y-%d-%m') } %>
   <%#= f.text_field :ends_on, :placeholder => 'Select Date'%>

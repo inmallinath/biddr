@@ -40,6 +40,9 @@ class Auction < ActiveRecord::Base
     event :reserve_not_met do
       transitions from: :published, to: :reserve_not_met
     end
-
+  end
+  
+  def published
+    where("aasm_state=published")
   end
 end

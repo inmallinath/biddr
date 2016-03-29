@@ -11,6 +11,13 @@
   <%= simple_form_for [@auction], remote: true do |f| %>
     <%= f.input :reserve_price, class: "form-control" %>
     <%= f.submit "Bid", class: "btn btn-primary" %>
-  <% end %>
+  <%end%>
+<%else%>
+<% if !(@auction.published?) %>
+  <%#= submit_tag "Publish", input_html: {class: "form-control", name: "publish-button"} %>
+  <%= link_to "Publish", publish_state_auction_path(@auction), :method => :put %>
 <%end%>
+<%end%>
+
+
 <p><h2>Previous Bids</h2></p>
