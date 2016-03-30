@@ -1,7 +1,8 @@
 class AuctionsController < ApplicationController
+  before_action :authenticate_user, except: [:index]
 
   def index
-    @auctions = Auction.order("created_at DESC")
+    @auctions = Auction.order("created_at DESC").published
   end
 
   def new
@@ -30,6 +31,7 @@ class AuctionsController < ApplicationController
 
   def show
     @auction = Auction.find params[:id]
+    @user_bid = UserBid.new
   end
 
   def index_user
@@ -40,4 +42,6 @@ class AuctionsController < ApplicationController
   def auction_params
     params.require(:auction).permit([:title, :description, :ends_on, :reserve_price, :aasm_state])
   end
+
+
 end

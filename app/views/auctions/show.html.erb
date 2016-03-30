@@ -1,22 +1,22 @@
 <div>
   <p><%= @auction.title %></p>
-  <p style="float:right"> Current Price: </p>
+  <p style="float:right"> Current Price: <%=UserBid.current_price%></p>
 </div>
 <div>
   <p><%= @auction.description %></p>
-  <p style="float:right"> State: </p>
+  <p style="float:right"> State: <%= @auction.aasm_state%></p>
 </div>
 
 <% if @auction.user != current_user%>
-  <%= simple_form_for [@auction], remote: true do |f| %>
-    <%= f.input :reserve_price, class: "form-control" %>
-    <%= f.submit "Bid", class: "btn btn-primary" %>
+  <%= simple_form_for [@auction, @user_bid] do |f| %>
+    <%= f.input :bid_price %>
+    <%= f.submit class: "btn btn-primary" %>
   <%end%>
 <%else%>
-<% if !(@auction.published?) %>
-  <%#= submit_tag "Publish", input_html: {class: "form-control", name: "publish-button"} %>
-  <%= link_to "Publish", publish_state_auction_path(@auction), :method => :put %>
-<%end%>
+  <% if !(@auction.published?) %>
+    <%#= submit_tag "Publish", input_html: {class: "form-control", name: "publish-button"} %>
+    <%= link_to "Publish", publish_state_auction_path(@auction), :method => :put %>
+  <%end%>
 <%end%>
 
 

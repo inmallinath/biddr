@@ -1,5 +1,6 @@
 class Auction < ActiveRecord::Base
   belongs_to :user
+  has_many :user_bids, dependent: :destroy
 
   include AASM
 
@@ -41,7 +42,7 @@ class Auction < ActiveRecord::Base
       transitions from: :published, to: :reserve_not_met
     end
   end
-  
+
   def published
     where("aasm_state=published")
   end

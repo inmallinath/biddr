@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       put :publish_state
     end
+    resources :user_bids, only: [:new, :create, :index]
   end
   get "/auctions/:id/user" => "auctions#index_user", as: :auction_user
   # Example of named route that can be invoked with purchase_url(id: product.id)

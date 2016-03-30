@@ -1,0 +1,7 @@
+<h2>My Auctions</h2>
+
+<% @auctions.each do |auction|%>
+  <div class="well">
+    <%= link_to auction.title.upcase, auction %>
+  </div>
+<% end %>
