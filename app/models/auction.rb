@@ -46,4 +46,8 @@ class Auction < ActiveRecord::Base
   def published
     where("aasm_state=published")
   end
+
+  def current_price(auction)
+    auction.user_bids.maximum(:bid_price, :group => auction)
+  end
 end

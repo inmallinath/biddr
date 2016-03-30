@@ -1,6 +1,6 @@
 <div>
   <p><%= @auction.title %></p>
-  <p style="float:right"> Current Price: <%=UserBid.current_price%></p>
+  <p style="float:right"> Current Price: <%=@auction.current_price(@auction)%></p>
 </div>
 <div>
   <p><%= @auction.description %></p>
@@ -21,3 +21,6 @@
 
 
 <p><h2>Previous Bids</h2></p>
+<% @auction.user_bids.each do |bid| %>
+  <h3><%=bid.bid_price%></h3> by <%=bid.user.full_name%>
+<% end %>

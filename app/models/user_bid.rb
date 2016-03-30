@@ -4,7 +4,5 @@ class UserBid < ActiveRecord::Base
 
   validates :bid_price, presence: true, numericality: {greater_than: 0}
 
-  def current_price
-    maximum("bid_price")
-  end
+  
 end
